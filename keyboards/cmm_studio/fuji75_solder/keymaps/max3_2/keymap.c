@@ -17,7 +17,9 @@ enum custom_keycodes {
     MAC_END,
     WIN_TASKMAN,
     Z_CUST,
-    Y_CUST
+    Y_CUST,
+    WIN_LOCK,
+    MAC_LOCK
 };
 
 // persistent zy shift in EEPROM config
@@ -122,8 +124,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [MAC_FN] = LAYOUT(
-        _______,  _______, _______, KC_MISSION_CONTROL, MAC_APPVIEW, _______, _______, _______, _______, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_INS,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        MAC_LOCK,  _______, _______, KC_MISSION_CONTROL, MAC_APPVIEW, _______, _______, _______, _______, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_INS,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_SYSTEM_SLEEP,
         RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_VAI,
@@ -138,8 +140,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL, KC_LGUI, KC_LALT, KC_SPC,  KC_RALT,   MO(WIN_FN), KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [WIN_FN] = LAYOUT(
-        _______,  _______, _______, KC_FILE_EXPLORER, WIN_TASKMAN, _______, _______, _______, _______, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_INS,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        WIN_LOCK,  _______, _______, KC_FILE_EXPLORER, WIN_TASKMAN, _______, _______, _______, _______, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, KC_INS,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_SYSTEM_SLEEP,
         RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_VAI,
@@ -284,23 +286,45 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           return false;
 
         case Y_CUST:
-        if (record->event.pressed) {
-          if (!zy_shift) {
-            register_code(KC_Y);
-          }
-          else {
-            register_code(KC_Z);
-          }
-        }
-        else {
-          if (!zy_shift) {
-            unregister_code(KC_Y);
-          }
-          else {
-            unregister_code(KC_Z);
-          }
-        }
-        return false;
+            if (record->event.pressed) {
+            if (!zy_shift) {
+                register_code(KC_Y);
+            }
+            else {
+                register_code(KC_Z);
+            }
+            }
+            else {
+            if (!zy_shift) {
+                unregister_code(KC_Y);
+            }
+            else {
+                unregister_code(KC_Z);
+            }
+            }
+            return false;
+
+        case MAC_LOCK:
+            if (record->event.pressed) {
+                register_code(KC_LCTL);
+                register_code(KC_LGUI);
+                register_code(KC_Q);
+            } else {
+                unregister_code(KC_LCTL);
+                unregister_code(KC_LGUI);
+                unregister_code(KC_Q);
+            }
+            return false;
+
+        case WIN_LOCK:
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                register_code(KC_L);
+            } else {
+                register_code(KC_LGUI);
+                register_code(KC_L);
+            }
+            return false;
 
         default:
             return true;   // Process all other keycodes normally
