@@ -172,7 +172,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return rotation;
 }
 
-static const char PROGMEM wpm_str[6] = "Bongo!";
+static const char PROGMEM wpm_str[8] = "Bongo!: ";
 
 // WPM-responsive animation stuff here
 #define IDLE_FRAMES 5
@@ -288,8 +288,18 @@ static void render_anim(void) {
 bool oled_task_user(void) {
     render_anim();
     oled_set_cursor(0, 0);
+
+    // default that needs too much space
     // sprintf(wpm_str, "WPM:%03d", get_current_wpm());
-    oled_write_raw_P(wpm_str, 6);
+    // oled_write(wpm_str, false);
+
+    // small space version
+    oled_write_raw_P(wpm_str, 8);
+    oled_set_cursor(8, 0);
+    const char *curr_wpm_str = get_u8_str(get_current_wpm(), ' ');
+    size_t curr_wpm_len = strlen(curr_wpm_str);
+    oled_write_raw_P(curr_wpm_str, (uint8_t) curr_wpm_len);
+    
     return false;
 }
 
