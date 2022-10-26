@@ -85,3 +85,9 @@
 #define OLED_FONT_H "./keymaps/max3-2/glcdfont.c"
 #define OLED_TIMEOUT 600000
 #define OLED_BRIGHTNESS 200
+
+// save some more space
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
+#define NO_ACTION_ONESHOT
+#define LAYER_STATE_8BIT
