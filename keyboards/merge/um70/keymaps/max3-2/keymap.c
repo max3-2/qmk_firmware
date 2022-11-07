@@ -52,17 +52,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BASE] = LAYOUT_lspace_2u_bksp(
             QK_GESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6,                KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL,   KC_BSPC,          KC_MUTE,
-            KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,                     KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC,   KC_BSLS,   KC_HOME,
-    MAC_TAB,   KC_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_END,
+            KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,                     KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC,   KC_BSLS,   KC_DEL,
+    MAC_TAB,   KC_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_INS,
     MAC_COPY,   KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B,                     KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,                   KC_UP,
     MAC_PASTE,   KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, MO(1),                  KC_SPC, KC_RGUI, KC_RALT,                               KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 [_ONE] = LAYOUT_lspace_2u_bksp(
-                MAC_LOCK, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS,       KC_TRNS,
-                KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,
-    MAC_NEWWIN,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,         KC_TRNS,
-    MAC_COPYALL,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS,
+                MAC_LOCK, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_VAD, RGB_VAI,      KC_TRNS,       KC_TRNS,
+                RGB_TOG,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_HUD, RGB_HUI,   KC_TRNS,   KC_HOME,
+    MAC_NEWWIN,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_SAD, RGB_SAI,    KC_TRNS,         KC_END,
+    MAC_COPYALL,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, RGB_SPD, RGB_SPI, KC_TRNS,                      KC_TRNS,
     KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                 KC_TRNS, KC_TRNS, KC_TRNS,                                        KC_TRNS, KC_TRNS, KC_TRNS
 ),
 [_TWO] = LAYOUT_lspace_2u_bksp(
@@ -83,27 +83,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Encoder changes RGB when any mod layer is active
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (get_highest_layer(layer_state) > _BASE) {
+    if (IS_LAYER_ON(_ONE)) {
       if (index == 0) { /* Master Left */
           if (clockwise) {
-              rgb_matrix_step_noeeprom();
+              rgb_matrix_step();
           } else {
-              rgb_matrix_step_reverse_noeeprom();
+              rgb_matrix_step_reverse();
           }
       } else if (index == 1) { /* Master Right */
           if (clockwise) {
-              tap_code(KC_VOLU);
+              rgb_matrix_step();
           } else {
-              tap_code(KC_VOLD);
+              rgb_matrix_step_reverse();
           }
       }
     }
     else {
       if (index == 0) { /* Master Left */
           if (clockwise) {
-              rgb_matrix_step_noeeprom();
+              tap_code(KC_VOLU);
           } else {
-              rgb_matrix_step_reverse_noeeprom();
+              tap_code(KC_VOLD);
           }
       } else if (index == 1) { /* Master Right */
           if (clockwise) {
@@ -202,7 +202,7 @@ void suspend_power_down_user(void) {
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     if (is_keyboard_master()) {
-        return OLED_ROTATION_90;
+        return OLED_ROTATION_180;
     }
 
     return rotation;
@@ -329,12 +329,12 @@ bool oled_task_user(void) {
     // sprintf(wpm_str, "WPM:%03d", get_current_wpm());
     // oled_write(wpm_str, false);
 
-    // small space version
-    oled_write_raw_P(wpm_str, 8);
-    oled_set_cursor(8, 0);
-    const char *curr_wpm_str = get_u8_str(get_current_wpm(), ' ');
-    size_t curr_wpm_len = strlen(curr_wpm_str);
-    oled_write_raw_P(curr_wpm_str, (uint8_t) curr_wpm_len);
+    // small space version, wip
+    // oled_write_raw_P(wpm_str, 8);
+    // oled_set_cursor(8, 0);
+    // const char *curr_wpm_str = get_u8_str(get_current_wpm(), ' ');
+    // size_t curr_wpm_len = strlen(curr_wpm_str);
+    // oled_write_raw_P(curr_wpm_str, (uint8_t) curr_wpm_len);
 
     return false;
 }
