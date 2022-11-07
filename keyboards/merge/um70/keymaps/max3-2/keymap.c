@@ -25,7 +25,12 @@ enum layer_names {
 };
 
 enum custom_keycodes {
-    MAC_LOCK = SAFE_RANGE
+    MAC_LOCK = SAFE_RANGE,
+    MAC_COPY,
+    MAC_COPYALL,
+    MAC_PASTE,
+    MAC_TAB,
+    MAC_NEWWIN
 };
 
 
@@ -39,7 +44,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   .---.  |-------------------------.          '---------------------------------|        |---|
  *   |M0 |  |Leader |  A|  S|  D|  F|  G|          |  H|  J|  K|  L|  ;|  :|   Retn |        |End|
  *   |---|  |----------------------------.        '--------------------------------|  .---. '---'
- *   |M1 |  |Shft, PO    |  Z|  X|  C|  V|  B|          |  N|  M|  ,|  ,|  /|  Shift, PC|     |Up |
+ *   |M1 |  |Shft    |  Z|  X|  C|  V|  B|          |  N|  M|  ,|  ,|  /|  Shift|     |Up |
  *   |---|  |----------------------------|          |---------------------------' .-----------.
  *   |M2 |  |Ctl |Gui |Alt |Space |FN   |          |    Space|   Alt|   Ctl|     |Lef|Dow|Rig|
  *   '---'  '----------------------------'          '-----------------------'     '-----------'
@@ -48,16 +53,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASE] = LAYOUT_lspace_2u_bksp(
             QK_GESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6,                KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL,   KC_BSPC,          KC_MUTE,
             KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,                     KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC,   KC_BSLS,   KC_HOME,
-    KC_1,   KC_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_END,
-    KC_2,   KC_LSPO, KC_Z, KC_X, KC_C, KC_V, KC_B,                     KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSPC,                   KC_UP,
-    KC_3,   KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, MO(1),                  KC_SPC, KC_RALT, KC_RCTL,                               KC_LEFT, KC_DOWN, KC_RGHT
+    MAC_TAB,   KC_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_END,
+    MAC_COPY,   KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B,                     KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,                   KC_UP,
+    MAC_PASTE,   KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, MO(1),                  KC_SPC, KC_RGUI, KC_RALT,                               KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 [_ONE] = LAYOUT_lspace_2u_bksp(
                 MAC_LOCK, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS,       KC_TRNS,
                 KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,
-    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,         KC_TRNS,
-    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS,
+    MAC_NEWWIN,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,         KC_TRNS,
+    MAC_COPYALL,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS,
     KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                 KC_TRNS, KC_TRNS, KC_TRNS,                                        KC_TRNS, KC_TRNS, KC_TRNS
 ),
 [_TWO] = LAYOUT_lspace_2u_bksp(
@@ -152,6 +157,37 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_Q);
             }
             return false;
+
+        case MAC_COPY:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("c"));
+            }
+        return false;
+
+        case MAC_COPYALL:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("ac"));
+            }
+            return false;
+
+        case MAC_PASTE:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("v"));
+            }
+            return false;
+
+        case MAC_TAB:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("t"));
+            }
+            return false;
+
+        case MAC_NEWWIN:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LGUI("n"));
+            }
+            return false;
+
         default:
             return true;
     }
@@ -299,7 +335,7 @@ bool oled_task_user(void) {
     const char *curr_wpm_str = get_u8_str(get_current_wpm(), ' ');
     size_t curr_wpm_len = strlen(curr_wpm_str);
     oled_write_raw_P(curr_wpm_str, (uint8_t) curr_wpm_len);
-    
+
     return false;
 }
 
