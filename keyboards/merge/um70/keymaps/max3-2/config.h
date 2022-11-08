@@ -75,7 +75,7 @@
 
 // more power
 #undef RGBLIGHT_LIMIT_VAL
-#define RGBLIGHT_LIMIT_VAL 165
+#define RGBLIGHT_LIMIT_VAL 160
 
 // Leader config
 #define LEADER_PER_KEY_TIMING
