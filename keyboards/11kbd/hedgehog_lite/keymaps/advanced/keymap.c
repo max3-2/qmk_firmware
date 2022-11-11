@@ -29,7 +29,7 @@ const rgblight_segment_t PROGMEM my_mac_fn_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     my_mac_fn_layer,
     my_capsword_layer,
-    my_capslock_layer,
+    my_capslock_layer
 );
 
 void keyboard_post_init_user(void) {
