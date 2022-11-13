@@ -26,6 +26,9 @@
 #define RGBLIGHT_SAT_STEP 10
 #define RGBLIGHT_VAL_STEP 16
 
+// lights off during pc sleep
+#define RGBLIGHT_SLEEP
+
 // RGB modes
 #define RGBLIGHT_EFFECT_BREATHING
 #define RGBLIGHT_EFFECT_CHRISTMAS
