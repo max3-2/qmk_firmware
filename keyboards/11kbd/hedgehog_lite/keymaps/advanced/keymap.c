@@ -22,7 +22,7 @@ const rgblight_segment_t PROGMEM my_capsword_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 15, MY_BLUE}
 );
 const rgblight_segment_t PROGMEM my_mac_fn_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 8, MY_CHAT}
+    {0, 15, MY_PURPLE}
 );
 
 // Now define the array of layers. Later layers take precedence

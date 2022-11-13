@@ -35,7 +35,7 @@
 #define RGBLIGHT_LAYERS_RETAIN_VAL
 
 #define RGBLIGHT_LAYERS
-#define RGBLIGHT_LAYER_BLINK
+// #define RGBLIGHT_LAYER_BLINK
 
 // Custom colors for the layers
 #define MY_RED      0, 255, 230
