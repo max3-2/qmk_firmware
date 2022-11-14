@@ -60,10 +60,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_FN] = LAYOUT(
-        MAC_LOCK, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, ____, ____,
-        RGB_TOG, ____, KC_UP, ____, ____, ____, ____, ____, ____, ____, ____, RGB_MODE_REVERSE, RGB_MODE_FORWARD, ____, ____,
-        ____, KC_LEFT, KC_DOWN, KC_RIGHT, ____, ____, ____, ____, ____, ____, RGB_VAD, RGB_VAI, ____,
-        ____, KC_MEDIA_PLAY_PAUSE, KC_AUDIO_MUTE, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, ____, ____, ____, ____, RGB_HUD, RGB_HUI, ____,
+        MAC_LOCK, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, ____, ____,
+        RGB_TOG, ____, KC_UP, ____, ____, ____, ____, ____, ____, ____, ____, RGB_MODE_REVERSE, RGB_MODE_FORWARD, KC_AUDIO_MUTE, ____,
+        ____, KC_LEFT, KC_DOWN, KC_RIGHT, ____, ____, ____, ____, ____, ____, RGB_VAD, RGB_VAI, KC_MEDIA_PLAY_PAUSE,
+        ____, ____, ____, ____, ____, ____, ____, ____, ____, RGB_HUD, RGB_HUI, ____,
         ____, ____, ____, ____, ____, ____
     ),
 
