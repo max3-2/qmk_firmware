@@ -29,6 +29,7 @@ enum custom_keycodes {
     MAC_COPY,
     MAC_COPYALL,
     MAC_PASTE,
+    MAC_PASTERAW,
     MAC_TAB,
     MAC_NEWWIN
 };
@@ -63,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 RGB_TOG,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_HUD, RGB_HUI,   KC_TRNS,   KC_HOME,
     MAC_NEWWIN,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_SAD, RGB_SAI,    KC_TRNS,         KC_END,
     MAC_COPYALL,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, RGB_SPD, RGB_SPI, KC_TRNS,                      KC_TRNS,
-    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                 KC_TRNS, KC_TRNS, KC_TRNS,                                        KC_TRNS, KC_TRNS, KC_TRNS
+    MAC_PASTERAW,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                 KC_TRNS, KC_TRNS, KC_TRNS,                                        KC_TRNS, KC_TRNS, KC_TRNS
 ),
 [_TWO] = LAYOUT_lspace_2u_bksp(
                 KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS,       KC_TRNS,
@@ -173,6 +174,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case MAC_PASTE:
             if (record->event.pressed) {
                 SEND_STRING(SS_LGUI("v"));
+            }
+            return false;
+
+        case MAC_PASTERAW:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LALT(SS_LSFT(SS_LGUI("v"))));
             }
             return false;
 
