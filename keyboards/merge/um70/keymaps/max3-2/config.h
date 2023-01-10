@@ -79,7 +79,7 @@
 
 // Leader config
 #define LEADER_PER_KEY_TIMING
-#define LEADER_TIMEOUT 270
+#define LEADER_TIMEOUT 300
 
 // OLED config
 #define OLED_FONT_H "./keymaps/max3-2/glcdfont.c"
