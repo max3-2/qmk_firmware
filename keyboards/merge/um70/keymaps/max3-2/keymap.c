@@ -17,11 +17,11 @@
 #include QMK_KEYBOARD_H
 // #include <stdio.h>
 
-enum layer_names {
-    _BASE,
-    _ONE,
-    _TWO,
-    _THREE
+enum layers{
+  MAC_BASE,
+  MAC_FN,
+  WIN_BASE,
+  WIN_FN
 };
 
 enum custom_keycodes {
@@ -31,7 +31,14 @@ enum custom_keycodes {
     MAC_PASTE,
     MAC_PASTERAW,
     MAC_TAB,
-    MAC_NEWWIN
+    MAC_NEWWIN,
+
+    WIN_LOCK,
+    WIN_COPY,
+    WIN_COPYALL,
+    WIN_PASTE,
+    WIN_TAB,
+    WIN_NEWWIN
 };
 
 
@@ -51,40 +58,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   '---'  '----------------------------'          '-----------------------'     '-----------'
  */
 
-[_BASE] = LAYOUT_lspace_2u_bksp(
+[MAC_BASE] = LAYOUT_lspace_2u_bksp(
             QK_GESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6,                KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL,   KC_BSPC,          KC_MUTE,
             KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,                     KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC,   KC_BSLS,   KC_DEL,
-    MAC_TAB,   KC_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_INS,
-    MAC_COPY,   KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B,                     KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,                   KC_UP,
-    MAC_PASTE,   KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, MO(1),                  KC_SPC, KC_RGUI, KC_RALT,                               KC_LEFT, KC_DOWN, KC_RGHT
+    MAC_COPY,   KC_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_INS,
+    MAC_PASTE,   KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B,                     KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,                   KC_UP,
+    MAC_TAB,   KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, MO(1),                  KC_SPC, KC_RGUI, KC_RALT,                               KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
-[_ONE] = LAYOUT_lspace_2u_bksp(
+[MAC_FN] = LAYOUT_lspace_2u_bksp(
                 MAC_LOCK, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6,             KC_F7, KC_F8, KC_F9, KC_F10, RGB_VAD, RGB_VAI,      KC_TRNS,       KC_TRNS,
                 RGB_TOG,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_HUD, RGB_HUI,   KC_TRNS,   KC_HOME,
-    MAC_NEWWIN,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_SAD, RGB_SAI,    KC_TRNS,         KC_END,
-    MAC_COPYALL,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, RGB_SPD, RGB_SPI, KC_TRNS,                      KC_TRNS,
-    MAC_PASTERAW,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                 KC_TRNS, KC_TRNS, KC_TRNS,                                        KC_TRNS, KC_TRNS, KC_TRNS
+    MAC_COPYALL,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_SAD, RGB_SAI,    KC_TRNS,         KC_END,
+    MAC_PASTERAW,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, RGB_SPD, RGB_SPI, KC_TRNS,                      KC_TRNS,
+    MAC_NEWWIN,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                 KC_TRNS, KC_TRNS, KC_TRNS,                                        KC_TRNS, KC_TRNS, KC_TRNS
 ),
-[_TWO] = LAYOUT_lspace_2u_bksp(
-                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS,       KC_TRNS,
-                KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,
-    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,         KC_TRNS,
-    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS,
-    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                 KC_TRNS, KC_TRNS, KC_TRNS,                                        KC_TRNS, KC_TRNS, KC_TRNS
+[WIN_BASE] = LAYOUT_lspace_2u_bksp(
+          QK_GESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6,                KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL,   KC_BSPC,          KC_MUTE,
+          KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,                     KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC,   KC_BSLS,   KC_DEL,
+    WIN_COPY,   KC_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_INS,
+    WIN_PASTE,   KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B,                     KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,                   KC_UP,
+    WIN_TAB,   KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, MO(1),                  KC_SPC, KC_RGUI, KC_RALT,                               KC_LEFT, KC_DOWN, KC_RGHT
 ),
-[_THREE] = LAYOUT_lspace_2u_bksp(
-                KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS,       KC_TRNS,
-                KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,   KC_TRNS,
-    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,         KC_TRNS,
-    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS,
-    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                 KC_TRNS, KC_TRNS, KC_TRNS,                                        KC_TRNS, KC_TRNS, KC_TRNS
+[WIN_FN] = LAYOUT_lspace_2u_bksp(
+          WIN_LOCK, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6,             KC_F7, KC_F8, KC_F9, KC_F10, RGB_VAD, RGB_VAI,      KC_TRNS,       KC_TRNS,
+          RGB_TOG,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_HUD, RGB_HUI,   KC_TRNS,   KC_HOME,
+    WIN_COPYALL,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, RGB_SAD, RGB_SAI,    KC_TRNS,         KC_END,
+    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                        KC_TRNS, KC_TRNS, KC_TRNS, RGB_SPD, RGB_SPI, KC_TRNS,                      KC_TRNS,
+    WIN_NEWWIN,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                                 KC_TRNS, KC_TRNS, KC_TRNS,                                        KC_TRNS, KC_TRNS, KC_TRNS
 ),
 };
 
 // Encoder changes RGB when any mod layer is active
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (IS_LAYER_ON(_ONE)) {
+    if (IS_LAYER_ON(MAC_FN) || IS_LAYER_ON(WIN_FN)) {
       if (index == 0) { /* Master Left */
           if (clockwise) {
               rgb_matrix_step();
@@ -141,12 +148,29 @@ void matrix_scan_user(void) {
             send_string("[sic!]");
         }
 
+        // mac layer with mac
+        SEQ_THREE_KEYS(KC_M, KC_A, KC_C) {
+          //switch to mac layer and deactivate others
+          layer_clear();
+          //persistent
+          set_single_persistent_default_layer(MAC_BASE);
+        }
+
+        // win layer with win
+        SEQ_THREE_KEYS(KC_W, KC_I, KC_N) {
+          //switch to win layer
+          layer_clear();
+          //persistent
+          set_single_persistent_default_layer(WIN_BASE);
+        }
+
     }
 }
 
 // custom keys
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+        // mac macros
         case MAC_LOCK:
             if (record->event.pressed) {
                 register_code(KC_LCTL);
@@ -195,6 +219,47 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
+        // win macros
+        case WIN_LOCK:
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+                register_code(KC_L);
+            } else {
+                unregister_code(KC_LGUI);
+                unregister_code(KC_L);
+            }
+            return false;
+
+        case WIN_COPY:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL("c"));
+            }
+        return false;
+
+        case WIN_COPYALL:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL("ac"));
+            }
+            return false;
+
+        case WIN_PASTE:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL("v"));
+            }
+            return false;
+
+        case WIN_TAB:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL("tl"));
+            }
+            return false;
+
+        case WIN_NEWWIN:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LCTL("nl"));
+            }
+            return false;
+
         default:
             return true;
     }
@@ -215,7 +280,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return rotation;
 }
 
-static const char PROGMEM wpm_str[8] = "Bongo!";
+static const char PROGMEM wpm_str[6] = "Bongo!";
 
 // WPM-responsive animation stuff here
 #define IDLE_FRAMES 3 // size reduced from 5
@@ -340,9 +405,26 @@ bool oled_task_user(void) {
     oled_set_cursor(0, 0);
     oled_write_P(wpm_str, false);
     oled_set_cursor(0, 2);
-    oled_write_P(PSTR("WPM:"), false);
+    oled_write_P(PSTR("WPM: "), false);
     oled_write(get_u8_str(get_current_wpm(), ' '), false);
-
+    oled_set_cursor(0, 3);
+    oled_write_P(PSTR("L: "), false);
+    switch (get_highest_layer(layer_state)) {
+        case MAC_BASE:
+            oled_write_P(PSTR("M"), false);
+            break;
+        case MAC_FN:
+            oled_write_P(PSTR("MF"), false);
+            break;
+        case WIN_BASE:
+            oled_write_P(PSTR("W"), false);
+            break;
+        case WIN_FN:
+            oled_write_P(PSTR("WF"), false);
+            break;
+        default:
+            oled_write_P(PSTR("X"), false);
+    }
     return false;
 }
 
