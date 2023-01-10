@@ -124,6 +124,22 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
       return true;
 }
 
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (host_keyboard_led_state().caps_lock) {
+        rgb_matrix_set_color(0, RGB_RED);
+        rgb_matrix_set_color(1, RGB_RED);
+        rgb_matrix_set_color(2, RGB_RED);
+      }
+
+    else if (is_caps_word_on()) {
+      rgb_matrix_set_color(0, RGB_BLUE);
+      rgb_matrix_set_color(1, RGB_BLUE);
+      rgb_matrix_set_color(2, RGB_BLUE);
+    }
+
+    return false;
+}
+
 // Leader control code
 LEADER_EXTERNS();
 
@@ -404,23 +420,23 @@ bool oled_task_user(void) {
     // small space version, wip
     oled_set_cursor(0, 0);
     oled_write_P(wpm_str, false);
-    oled_set_cursor(0, 2);
-    oled_write_P(PSTR("WPM: "), false);
+    oled_set_cursor(0, 1);
+    oled_write_P(PSTR("WPM:"), false);
     oled_write(get_u8_str(get_current_wpm(), ' '), false);
-    oled_set_cursor(0, 3);
-    oled_write_P(PSTR("L: "), false);
+    oled_set_cursor(0, 2);
+    oled_write_P(PSTR("L:"), false);
     switch (get_highest_layer(layer_state)) {
         case MAC_BASE:
-            oled_write_P(PSTR("M"), false);
+            oled_write_P(PSTR("Mac"), false);
             break;
         case MAC_FN:
-            oled_write_P(PSTR("MF"), false);
+            oled_write_P(PSTR("MacF"), false);
             break;
         case WIN_BASE:
-            oled_write_P(PSTR("W"), false);
+            oled_write_P(PSTR("Win"), false);
             break;
         case WIN_FN:
-            oled_write_P(PSTR("WF"), false);
+            oled_write_P(PSTR("WinF"), false);
             break;
         default:
             oled_write_P(PSTR("X"), false);
