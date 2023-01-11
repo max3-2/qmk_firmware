@@ -1,16 +1,16 @@
-/* Copyright 2021 duoshock 
- * 
- * This program is free software: you can redistribute it and/or modify 
- * it under the terms of the GNU General Public License as published by 
- * the Free Software Foundation, either version 2 of the License, or 
- * (at your option) any later version. 
- * 
- * This program is distributed in the hope that it will be useful, 
- * but WITHOUT ANY WARRANTY; without even the implied warranty of 
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
- * GNU General Public License for more details. 
- * 
- * You should have received a copy of the GNU General Public License 
+/* Copyright 2021 duoshock
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
@@ -42,16 +42,16 @@ led_config_t g_led_config = { {
     { 70, 71, 72, 73, 74, 75, 76, 61 },
     { 77, 78, 79, 80, 81, 82, XX, 69 },
 }, {
-    { 224, 0  }, { 224, 13 }, { 224, 26 }, { 148, 39 }, { 185, 52 }, {  224,  64 },
+    { 112, 0  }, { 112, 13 }, { 112, 26 }, { 112, 39 }, { 112, 52 }, {  112,  64 },
 
-                 {  32,  0 }, {  64, 0  }, {  96, 0  }, { 128, 0  }, { 160, 0  }, {  192,  0  }, {  224,  0  }, 
+                 {  32,  0 }, {  64, 0  }, {  96, 0  }, { 128, 0  }, { 160, 0  }, {  192,  0  }, {  224,  0  },
                  {  32, 16 }, {  64, 16 }, {  96, 16 }, { 128, 16 }, { 160, 16 }, {  192,  16 },
     {   0, 32 }, {  32, 32 }, {  64, 32 }, {  96, 32 }, { 128, 32 }, { 160, 32 }, {  192,  32 },
     {   0, 48 }, {  32, 48 }, {  64, 48 }, {  96, 48 }, { 128, 48 }, { 160, 48 }, {  192,  48 },
     {   0, 64 }, {  32, 64 }, {  64, 64 }, {  96, 64 }, { 128, 64 }, { 160, 64 },
 
-    { 224, 0  }, { 224, 13 }, { 224, 26 }, { 148, 39 }, { 185, 52 }, {  224,  64 },
-    
+    { 112, 0  }, { 112, 13 }, { 112, 26 }, { 112, 39 }, { 112, 52 }, {  112,  64 },
+
     {   0,  0  }, {  32,  0 }, {  64, 0  }, {  96, 0  }, { 128, 0  }, { 160, 0  }, {  192,  0  }, {  224,  0  },
     {   0,  16 }, {  32, 16 }, {  64, 16 }, {  96, 16 }, { 128, 16 }, { 160, 16 }, {  192,  16 }, {  223,  16  }, {  224,  16  },
     {   0,  32 }, {  32, 32 }, {  64, 32 }, {  96, 32 }, { 128, 32 }, { 160, 32 }, {  192,  32 }, {  223,  32  },
