@@ -82,6 +82,9 @@
 #define LEADER_PER_KEY_TIMING
 #define LEADER_TIMEOUT 300
 
+// Leader LEd indication on right, only caps word not lock. skip this
+// #define SPLIT_LED_STATE_ENABLE
+
 // OLED config
 #define OLED_FONT_H "./keymaps/max3-2/glcdfont.c"
 #define OLED_TIMEOUT 600000

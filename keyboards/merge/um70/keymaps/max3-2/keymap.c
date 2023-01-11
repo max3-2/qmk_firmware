@@ -123,19 +123,20 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
       return true;
 }
 
-uint8_t j = 12;
-uint8_t underglow_leds[12] = {0, 1, 2, 3, 4, 5, 39, 40, 41, 42, 43, 44};
+uint8_t j = 6;
+uint8_t underglow_leds_left[6] = {0, 1, 2, 3, 4, 5};
+uint8_t underglow_leds_right[6] = {39, 40, 41, 42, 43, 44};
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (host_keyboard_led_state().caps_lock) {
         for (uint8_t i; i < j; i++) {
-          rgb_matrix_set_color(underglow_leds[i], RGB_RED);
+          rgb_matrix_set_color(underglow_leds_left[i], RGB_RED);
         }
       }
 
     else if (is_caps_word_on()) {
       for (uint8_t i; i < j; i++) {
-        rgb_matrix_set_color(underglow_leds[i], RGB_BLUE);
+        rgb_matrix_set_color(underglow_leds_left[i], RGB_BLUE);
       }
     }
 
@@ -419,7 +420,7 @@ bool oled_task_user(void) {
     // sprintf(wpm_str, "WPM:%03d", get_current_wpm());
     // oled_write(wpm_str, false);
 
-    // small space version, wip
+    // small space version
     oled_set_cursor(0, 0);
     oled_write_P(wpm_str, false);
     oled_set_cursor(0, 1);
