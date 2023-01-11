@@ -63,7 +63,7 @@
 
 // Simple RGB effects, saved due to win layering and space
 // #define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
-#define ENABLE_RGB_MATRIX_DIGITAL_RAIN
+// #define ENABLE_RGB_MATRIX_DIGITAL_RAIN
 // #define ENABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS
 
 // Reactive RGB
@@ -93,8 +93,11 @@
 // save some more space
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
+
 #define NO_ACTION_ONESHOT
 #define LAYER_STATE_8BIT
 
 // Fix WakeUp
-#define USB_SUSPEND_WAKEUP_DELAY 250
+#define USB_SUSPEND_WAKEUP_DELAY 150
+#define SPLIT_WATCHDOG_ENABLE
+#define SPLIT_WATCHDOG_TIMEOUT 2000
