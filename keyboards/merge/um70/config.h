@@ -27,8 +27,8 @@
 
 #define SOFT_SERIAL_PIN D2
 
-// This produces wake up issues
-// #define SPLIT_USB_DETECT
+// This produces wake up issues but is needed
+#define SPLIT_USB_DETECT
 
 #define MASTER_LEFT
 #define SPLIT_MODS_ENABLE
