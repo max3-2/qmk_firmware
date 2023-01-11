@@ -123,17 +123,20 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
       return true;
 }
 
+uint8_t j = 12;
+uint8_t underglow_leds[12] = {0, 1, 2, 3, 4, 5, 39, 40, 41, 42, 43, 44};
+
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (host_keyboard_led_state().caps_lock) {
-        rgb_matrix_set_color(0, RGB_RED);
-        rgb_matrix_set_color(1, RGB_RED);
-        // rgb_matrix_set_color(2, RGB_RED);
+        for (uint8_t i; i < j; i++) {
+          rgb_matrix_set_color(underglow_leds[i], RGB_RED);
+        }
       }
 
     else if (is_caps_word_on()) {
-      rgb_matrix_set_color(0, RGB_CORAL);
-      rgb_matrix_set_color(1, RGB_CORAL);
-      // rgb_matrix_set_color(2, RGB_BLUE);
+      for (uint8_t i; i < j; i++) {
+        rgb_matrix_set_color(underglow_leds[i], RGB_BLUE);
+      }
     }
 
     return false;
