@@ -29,6 +29,24 @@
 
 #define XX NO_LED
 
+/*
+The following has been fixed to global coordinates as recommended by QMK. Only
+the X xoordinate needs adaption.
+Computation scheme is:
+
+x = 224 / (NUMBER_OF_COLS - 1) * COL_POSITION
+y =  64 / (NUMBER_OF_ROWS - 1) * ROW_POSITION
+
+Left side X 0…110
+Underglow at 112
+Right side X 114…224
+
+N cols left 7, skip 18,333
+N cols right 9, skip 13,75, add 114
+
+Values are rounded!
+*/
+
 led_config_t g_led_config = { {
     {  6,  7,  8,  9, 10, 11, 12, XX },
     { 13, 14, 15, 16, 17, 18, XX, XX },
