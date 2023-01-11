@@ -14,9 +14,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "config_common.h"
 
 #pragma once
+
+#include "config_common.h"
 
 // disable almost all default effects
 #undef RGB_MATRIX_ALPHAS_MODS
