@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "config_common.h"
+// #include "config_common.h"
 
 #define RGB_DI_PIN E6
 #ifdef RGB_DI_PIN
@@ -47,9 +47,12 @@
 
 #endif
 
+#define BOOTMAGIC_LITE_ROW 0
+#define BOOTMAGIC_LITE_COLUMN 0
+
 // Leader config
 #define LEADER_PER_KEY_TIMING
-#define LEADER_TIMEOUT 300
+#define LEADER_TIMEOUT 275
 
 // Fancy LED layer
 #define RGBLIGHT_LAYERS

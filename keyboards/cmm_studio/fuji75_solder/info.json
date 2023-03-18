@@ -1,7 +1,13 @@
 {
+    "manufacturer": "CMM_Studio",
     "keyboard_name": "FUJI75_solder",
-    "url": "",
     "maintainer": "qmk",
+    "url": "",
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0x4637",
+        "vid": "0x434D"
+    },
     "layouts": {
         "LAYOUT": {
             "layout": [

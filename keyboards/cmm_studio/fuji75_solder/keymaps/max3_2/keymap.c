@@ -11,8 +11,7 @@ enum layers{
 };
 
 enum custom_keycodes {
-    KC_MISSION_CONTROL = SAFE_RANGE,
-    KC_FILE_EXPLORER,
+    KC_FILE_EXPLORER = SAFE_RANGE,
     MAC_HOME,
     MAC_END,
     WIN_TASKMAN,
@@ -41,7 +40,6 @@ void eeconfig_init_user(void) {  // EEPROM is getting reset!
 }
 
 #define MAC_APPVIEW C(KC_DOWN)  //ctrl + down is app view on mac
-#define KC_MCTL KC_MISSION_CONTROL
 
 // Lighting layers
 const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -116,10 +114,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [MAC_BASE] = LAYOUT(
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, KC_PGUP,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    Y_CUST,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_PGDN,
-        KC_LEAD, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,  MAC_HOME,
-        KC_LSFT, Z_CUST,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, MAC_END, KC_UP,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, MAC_HOME,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    Y_CUST,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, MAC_END,
+        QK_LEAD, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,  KC_PGUP,
+        KC_LSFT, Z_CUST,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, KC_PGDN, KC_UP,
         KC_LCTL, KC_LALT, KC_LGUI, KC_SPC,  KC_RGUI,   MO(MAC_FN), KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
@@ -133,10 +131,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [WIN_BASE] = LAYOUT(
         KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,
-        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, KC_PGUP,
-        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    Y_CUST,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_PGDN,
-        KC_LEAD, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,  KC_HOME,
-        KC_LSFT, Z_CUST,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, KC_END, KC_UP,
+        KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, KC_HOME,
+        KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    Y_CUST,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_END,
+        QK_LEAD, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, KC_ENT,  KC_PGUP,
+        KC_LSFT, Z_CUST,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, KC_PGDN, KC_UP,
         KC_LCTL, KC_LGUI, KC_LALT, KC_SPC,  KC_RALT,   MO(WIN_FN), KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [WIN_FN] = LAYOUT(
@@ -150,64 +148,95 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-LEADER_EXTERNS();
-
-void matrix_scan_user(void) {
-
-    LEADER_DICTIONARY() {
-        leading = false;
-        leader_end();
-
-        // Caps word when using double leader
-        SEQ_ONE_KEY(KC_LEAD) {
-            caps_word_on();
-            rgblight_set_layer_state(4, true);
+void leader_end_user(void) {
+    if (leader_sequence_one_key(QK_LEAD)) {
+        caps_word_on();
+        rgblight_set_layer_state(4, true);
+    }
+    else if (leader_sequence_two_keys(QK_LEAD, QK_LEAD)) {
+        tap_code(KC_CAPS);
+    }
+    else if (leader_sequence_three_keys(KC_M, KC_A, KC_C)) {
+        layer_clear();
+        set_single_persistent_default_layer(MAC_BASE);
+    }
+    else if (leader_sequence_three_keys(KC_W, KC_I, KC_N)) {
+        layer_clear();
+        set_single_persistent_default_layer(WIN_BASE);
+    }
+    else if (leader_sequence_two_keys(KC_S, KC_W)) {
+        zy_shift = !zy_shift;
+        if (zy_shift) {
+            rgblight_blink_layer_repeat(6, 300, 4);
         }
-
-        // caps lock with triple leader
-        SEQ_TWO_KEYS(KC_LEAD, KC_LEAD) {
-            tap_code(KC_CAPS);
+        else {
+            rgblight_blink_layer_repeat(7, 300, 4);
         }
-
-        // mac layer with mac
-        SEQ_THREE_KEYS(KC_M, KC_A, KC_C) {
-          //switch to mac layer and deactivate others
-          layer_clear();
-          //persistent
-          set_single_persistent_default_layer(MAC_BASE);
-          //make some leds shine in layers above
-        }
-
-        // win layer with win
-        SEQ_THREE_KEYS(KC_W, KC_I, KC_N) {
-          //switch to win layer
-          layer_clear();
-          //persistent
-          set_single_persistent_default_layer(WIN_BASE);
-          //make some leds shine in layers above
-        }
-
-        // change zy shift with zy
-        SEQ_TWO_KEYS(KC_S, KC_W) {
-            zy_shift = !zy_shift;
-            if (zy_shift) {
-              rgblight_blink_layer_repeat(6, 300, 4);
-            }
-            else {
-              rgblight_blink_layer_repeat(7, 300, 4);
-            }
-            // Update eeprom
-            user_config.zy_shift = zy_shift;
-            eeconfig_update_user(user_config.raw);
-        }
-
-        // more basic replace macros
-        SEQ_TWO_KEYS(KC_S, KC_C) {
-            send_string("[sic!]");
-        }
-
+        // Update eeprom
+        user_config.zy_shift = zy_shift;
+        eeconfig_update_user(user_config.raw);
+    }
+    else if (leader_sequence_two_keys(KC_S, KC_C)) {
+        SEND_STRING("[sic!]");
     }
 }
+
+// void matrix_scan_user(void) {
+
+//     LEADER_DICTIONARY() {
+//         leading = false;
+//         leader_end();
+
+//     //     // Caps word when using double leader
+//         SEQ_ONE_KEY(KC_LEAD) {
+//             caps_word_on();
+//             rgblight_set_layer_state(4, true);
+//         }
+
+//     //     // caps lock with triple leader
+//         SEQ_TWO_KEYS(KC_LEAD, KC_LEAD) {
+//             tap_code(KC_CAPS);
+//         }
+
+//         // // mac layer with mac
+//         SEQ_THREE_KEYS(KC_M, KC_A, KC_C) {
+//           //switch to mac layer and deactivate others
+//           layer_clear();
+//           //persistent
+//           set_single_persistent_default_layer(MAC_BASE);
+//           //make some leds shine in layers above
+//         }
+
+//         // win layer with win
+//         SEQ_THREE_KEYS(KC_W, KC_I, KC_N) {
+//           //switch to win layer
+//           layer_clear();
+//           //persistent
+//           set_single_persistent_default_layer(WIN_BASE);
+//           //make some leds shine in layers above
+//         }
+
+//         // change zy shift with zy
+//         SEQ_TWO_KEYS(KC_S, KC_W) {
+//             zy_shift = !zy_shift;
+//             if (zy_shift) {
+//               rgblight_blink_layer_repeat(6, 300, 4);
+//             }
+//             else {
+//               rgblight_blink_layer_repeat(7, 300, 4);
+//             }
+//             // Update eeprom
+//             user_config.zy_shift = zy_shift;
+//             eeconfig_update_user(user_config.raw);
+//         }
+
+//         // more basic replace macros
+//         SEQ_TWO_KEYS(KC_S, KC_C) {
+//             send_string("[sic!]");
+//         }
+
+//     }
+// }
 
 // disable caps word light
 void caps_word_set_user(bool active) {
