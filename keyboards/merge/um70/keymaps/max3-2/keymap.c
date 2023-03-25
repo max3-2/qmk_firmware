@@ -61,16 +61,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [MAC_BASE] = LAYOUT_lspace_2u_bksp(
             KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6,                KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL,   KC_BSPC,          KC_MUTE,
             KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,                     KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC,   KC_BSLS,   KC_DEL,
-    MAC_COPY,   KC_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_INS,
+    MAC_COPY,   QK_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_INS,
     MAC_PASTE,   KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B,                     KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,                   KC_UP,
     MAC_TAB,   KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, MO(2),                  KC_SPC, KC_RGUI, KC_RALT,                               KC_LEFT, KC_DOWN, KC_RGHT
 ),
 [WIN_BASE] = LAYOUT_lspace_2u_bksp(
           KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6,                KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL,   KC_BSPC,          KC_MUTE,
           KC_TAB,  KC_Q, KC_W, KC_E, KC_R, KC_T,                     KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC, KC_RBRC,   KC_BSLS,   KC_DEL,
-    WIN_COPY,   KC_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_INS,
+    WIN_COPY,   QK_LEAD, KC_A, KC_S, KC_D, KC_F, KC_G,                     KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT,    KC_ENT,         KC_INS,
     WIN_PASTE,   KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B,                     KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,                   KC_UP,
-    WIN_TAB,   KC_LCTL, KC_LALT, KC_LGUI, KC_SPC, MO(3),                  KC_SPC, KC_RGUI, KC_RALT,                               KC_LEFT, KC_DOWN, KC_RGHT
+    WIN_TAB,   KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, MO(3),                  KC_SPC, KC_RGUI, KC_RALT,                               KC_LEFT, KC_DOWN, KC_RGHT
 ),
 [MAC_FN] = LAYOUT_lspace_2u_bksp(
                 MAC_LOCK, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6,             KC_F7, KC_F8, KC_F9, KC_F10, RGB_VAD, RGB_VAI,      KC_TRNS,       KC_TRNS,
@@ -143,46 +143,24 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     return false;
 }
 
-// Leader control code
-LEADER_EXTERNS();
-
-void matrix_scan_user(void) {
-
-    LEADER_DICTIONARY() {
-        leading = false;
-        leader_end();
-
-        // Caps word when using double leader
-        SEQ_ONE_KEY(KC_LEAD) {
-            caps_word_on();
-        }
-
-        // caps lock with triple leader
-        SEQ_TWO_KEYS(KC_LEAD, KC_LEAD) {
-            tap_code(KC_CAPS);
-        }
-
-        // more basic replace macros
-        SEQ_TWO_KEYS(KC_S, KC_C) {
-            send_string("[sic!]");
-        }
-
-        // mac layer with mac
-        SEQ_THREE_KEYS(KC_M, KC_A, KC_C) {
-          //switch to mac layer and deactivate others
-          layer_clear();
-          //persistent
-          set_single_persistent_default_layer(MAC_BASE);
-        }
-
-        // win layer with win
-        SEQ_THREE_KEYS(KC_W, KC_I, KC_N) {
-          //switch to win layer
-          layer_clear();
-          //persistent
-          set_single_persistent_default_layer(WIN_BASE);
-        }
-
+void leader_end_user(void) {
+    if (leader_sequence_one_key(QK_LEAD)) {
+        caps_word_on();
+    }
+    else if (leader_sequence_two_keys(QK_LEAD, QK_LEAD)) {
+        tap_code(KC_CAPS);
+    }
+    else if (leader_sequence_three_keys(KC_M, KC_A, KC_C)) {
+        //switch to mac layer and deactivate others
+        layer_clear();
+        //persistent
+        set_single_persistent_default_layer(MAC_BASE);
+    }
+    else if (leader_sequence_three_keys(KC_W, KC_I, KC_N)) {
+        //switch to win layer
+        layer_clear();
+        //persistent
+        set_single_persistent_default_layer(WIN_BASE);
     }
 }
 
