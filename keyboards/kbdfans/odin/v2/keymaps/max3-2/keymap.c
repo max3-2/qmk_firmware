@@ -19,10 +19,10 @@ enum custom_keycodes {
 
 // Lighting layers
 const rgblight_segment_t PROGMEM my_capsword_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 4, RGB_SPRINGGREEN}
+    {0, 4, HSV_SPRINGGREEN}
 );
 const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 4, RGB_MAGENTA}
+    {0, 4, HSV_MAGENTA}
 );
 
 // Now define the array of layers. Later layers take precedence
