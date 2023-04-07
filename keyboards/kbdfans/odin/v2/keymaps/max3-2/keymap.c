@@ -19,10 +19,10 @@ enum custom_keycodes {
 
 // Lighting layers
 const rgblight_segment_t PROGMEM my_capsword_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 4, RGB_CORAL}
+    {0, 4, RGB_SPRINGGREEN}
 );
 const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 4, RGB_PINK}
+    {0, 4, RGB_MAGENTA}
 );
 
 // Now define the array of layers. Later layers take precedence
@@ -34,6 +34,12 @@ const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 void keyboard_post_init_user(void) {
     // Enable the LED layers
     rgblight_layers = my_rgb_layers;
+
+    // Debug mode
+    // debug_enable = true;
+    // debug_matrix = true;
+    // debug_keyboard = true;
+    // debug_mouse = true;
 };
 
 // and enable callbacks
@@ -45,11 +51,11 @@ bool led_update_user(led_t led_state) {
 // Custom KC overides for home and end on alt LR
 const key_override_t home_override = ko_make_with_layers_and_negmods(
     MOD_MASK_ALT, KC_LEFT, KC_HOME,
-    0, MOD_MASK_CSG
+    ~0, MOD_MASK_CSG
 );
 const key_override_t end_override = ko_make_with_layers_and_negmods(
     MOD_MASK_ALT, KC_RGHT, KC_END,
-    0, MOD_MASK_CSG
+    ~0, MOD_MASK_CSG
 );
 const key_override_t pgup_override = ko_make_with_layers_and_negmods(
     MOD_MASK_ALT, KC_UP, KC_PGUP,
