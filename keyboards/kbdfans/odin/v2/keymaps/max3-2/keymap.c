@@ -48,6 +48,9 @@ bool led_update_user(led_t led_state) {
     return true;
 };
 
+/* Currently those are disabled due to locking with alt arrow word skipping
+   on macOS systems. Usually Fn LR should be enough but if this is annoying
+   skipping will be re-enabled here!
 // Custom KC overides for home and end on alt LR
 const key_override_t home_override = ko_make_with_layers_and_negmods(
     MOD_MASK_ALT, KC_LEFT, KC_HOME,
@@ -74,6 +77,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &pgdn_override,
 	NULL
 };
+*/
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [WIN_BASE] = LAYOUT(
@@ -89,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [WIN_FN] = LAYOUT(
 
-        WIN_LOCK, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_WWW_HOME, _______, _______,
+        WIN_LOCK, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_WWW_HOME, _______, WIN_TASKMAN,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_VAD,
         RGB_TOG, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_VAI,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_MOD,
