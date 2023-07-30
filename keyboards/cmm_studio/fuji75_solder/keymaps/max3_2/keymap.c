@@ -181,63 +181,6 @@ void leader_end_user(void) {
     }
 }
 
-// void matrix_scan_user(void) {
-
-//     LEADER_DICTIONARY() {
-//         leading = false;
-//         leader_end();
-
-//     //     // Caps word when using double leader
-//         SEQ_ONE_KEY(KC_LEAD) {
-//             caps_word_on();
-//             rgblight_set_layer_state(4, true);
-//         }
-
-//     //     // caps lock with triple leader
-//         SEQ_TWO_KEYS(KC_LEAD, KC_LEAD) {
-//             tap_code(KC_CAPS);
-//         }
-
-//         // // mac layer with mac
-//         SEQ_THREE_KEYS(KC_M, KC_A, KC_C) {
-//           //switch to mac layer and deactivate others
-//           layer_clear();
-//           //persistent
-//           set_single_persistent_default_layer(MAC_BASE);
-//           //make some leds shine in layers above
-//         }
-
-//         // win layer with win
-//         SEQ_THREE_KEYS(KC_W, KC_I, KC_N) {
-//           //switch to win layer
-//           layer_clear();
-//           //persistent
-//           set_single_persistent_default_layer(WIN_BASE);
-//           //make some leds shine in layers above
-//         }
-
-//         // change zy shift with zy
-//         SEQ_TWO_KEYS(KC_S, KC_W) {
-//             zy_shift = !zy_shift;
-//             if (zy_shift) {
-//               rgblight_blink_layer_repeat(6, 300, 4);
-//             }
-//             else {
-//               rgblight_blink_layer_repeat(7, 300, 4);
-//             }
-//             // Update eeprom
-//             user_config.zy_shift = zy_shift;
-//             eeconfig_update_user(user_config.raw);
-//         }
-
-//         // more basic replace macros
-//         SEQ_TWO_KEYS(KC_S, KC_C) {
-//             send_string("[sic!]");
-//         }
-
-//     }
-// }
-
 // disable caps word light
 void caps_word_set_user(bool active) {
     if (!active) {
