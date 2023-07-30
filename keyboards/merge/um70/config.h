@@ -26,11 +26,9 @@
 
 // This produces wake up issues but is needed
 #define SPLIT_USB_DETECT
-
 #define MASTER_LEFT
 #define SPLIT_MODS_ENABLE
 
-#define RGB_DI_PIN D3
 #define RGBLIGHT_SPLIT
 #define RGBLED_NUM 83
 #define RGBLED_SPLIT { 39, 44 }
@@ -45,7 +43,6 @@
 #endif
 
 #define RGBLIGHT_SLEEP
-#define RGBLIGHT_LIMIT_VAL 150
 
 #define B6_AUDIO
 
