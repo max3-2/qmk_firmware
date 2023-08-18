@@ -1,6 +1,4 @@
-// Copyright 2022 CMM.Studio Freather
-// SPDX-License-Identifier: GPL-2.0-or-later
-
+// Copyright max3-2
 #include QMK_KEYBOARD_H
 
 #define ____ KC_TRNS
