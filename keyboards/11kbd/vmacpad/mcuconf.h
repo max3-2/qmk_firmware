@@ -18,6 +18,24 @@
 
 #include_next <mcuconf.h>
 
+// HSE CLK divider reconfig, see also mcuconf.h (taken from xelus/rs108/mcuconf.h)
+// This can be removed in rev.2 with 8MHz crystal
+#undef STM32_PLLM_VALUE
+#undef STM32_PLLN_VALUE
+#undef STM32_PLLP_VALUE
+#undef STM32_PLLQ_VALUE
+#undef STM32_PPRE1
+#undef STM32_PPRE2
+
+// 64MHz core
+#define STM32_PLLM_VALUE    8
+#define STM32_PLLN_VALUE    168
+#define STM32_PLLP_VALUE    4
+#define STM32_PLLQ_VALUE    7
+#define STM32_PPRE1         STM32_PPRE1_DIV2
+#define STM32_PPRE2         STM32_PPRE1_DIV1
+// to here
+
 #undef STM32_PWM_USE_ADVANCED
 #define STM32_PWM_USE_ADVANCED TRUE
 

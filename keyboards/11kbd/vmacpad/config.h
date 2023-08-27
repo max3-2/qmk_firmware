@@ -19,7 +19,9 @@
 // Should be default by now
 // #define EARLY_INIT_PERFORM_BOOTLOADER_JUMP TRUE
 
-#define RGB_MATRIX_LED_COUNT 6
+// HSE CLK reconfig, see also mcuconf.h (taken from xelus/rs108/mcuconf.h)
+// This can be removed in rev.2 with 8MHz crystal
+#define STM32_HSECLK 16000000
 
 #define WS2812_PWM_COMPLEMENTARY_OUTPUT
 #define WS2812_PWM_DRIVER PWMD1
@@ -28,13 +30,21 @@
 #define WS2812_DMA_STREAM STM32_DMA2_STREAM5
 #define WS2812_DMA_CHANNEL 6
 
-#define RGB_MATRIX_DEFAULT_VAL 150
+// Encoder better setup - resolution in info json and more debounce tolerance
+// #define ENCODER_RESOLUTION 1
+// #define TAP_CODE_DELAY 5
+// #define ENCODER_DEFAULT_POS 0x03
 
-#define RGB_DISABLE_WHEN_USB_SUSPENDED  // turn off effects when suspended
-#define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_GRADIENT_UP_DOWN
+// RGB Backlight
+#define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_BREATHING
+#define RGBLIGHT_DEFAULT_HUE 195
 
-#define ENABLE_RGB_MATRIX_HUE_WAVE
-#define ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN
+// RGB Matrix
+// #define RGB_MATRIX_LED_COUNT 6
+// #define RGB_MATRIX_DEFAULT_VAL 150
 
-// Default 4, upscaled to make the encoder slower
-#define ENCODER_RESOLUTION 8
+// #define RGB_DISABLE_WHEN_USB_SUSPENDED  // turn off effects when suspended
+// #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_BREATHING
+
+// #define ENABLE_RGB_MATRIX_HUE_WAVE
+// #define ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN
