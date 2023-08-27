@@ -9,19 +9,26 @@ enum layers{
   _FN
 };
 
+enum custom_keycodes {
+    ENC_LEVEL = SAFE_RANGE
+};
+
+//Encoder state
+volatile bool enc_level = true;
+
 // Keymaps
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BASE] = LAYOUT(
-        KC_A, KC_B, KC_C, KC_D, KC_E,
+        LGUI(KC_MINUS), KC_S, MO(_FN), LSFT(KC_Z), LGUI(KC_EQUAL),
         KC_F, KC_G, KC_H, KC_I, KC_J,
-                    TG(_FN),
-        KC_L, KC_M, KC_N, KC_O, KC_P
+                    ENC_LEVEL,
+        KC_I, KC_J, KC_SPACE, KC_L, KC_O
     ),
 
     [_FN] = LAYOUT(
-        ____, ____, ____, ____, ____,
-        ____, ____, ____, ____, ____,
+        LGUI(KC_1), LGUI(LALT(KC_1)), ____, LGUI(KC_3), LGUI(KC_2),
+        ____, ____, ____, LGUI(LALT(KC_3)), ____,
                     ____,
         ____, ____, ____, ____, ____
     ),
@@ -29,32 +36,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 // Encoder with backend so this won't be proccessed by default matrix code
-// with fast encoders
+// with fast encoders. This is debounced by two-step since the encoder works
+// best with its native resolution which then has too many pulses
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {  // there's only one encoder
-        switch(biton32(layer_state)){
-            case _FN:
-                if (clockwise) {
-                    register_code(KC_LEFT);
-                    tap_code(KC_LEFT);
-                    unregister_code(KC_LCTL);
-                } else {
-                    register_code(KC_LCTL);
-                    register_code(KC_LSFT);
+        if (enc_level) {  // Fast
+            if (clockwise) {
+                register_code(KC_LSFT);
+                tap_code(KC_RIGHT);
+                unregister_code(KC_LSFT);
+            } else {
+                register_code(KC_LSFT);
+                tap_code(KC_LEFT);
+                unregister_code(KC_LSFT);
+            }
+        }
+        else {  // Slow
+            if (clockwise) {
                     tap_code(KC_RIGHT);
-                    unregister_code(KC_LCTL);
-                    unregister_code(KC_LSFT);
-                }
-                break;
-
-            default:  // _BASE
-                if (clockwise){
-                    tap_code(KC_DOWN);
-                } else{
-                    tap_code(KC_UP);
-                }
-                break;
+            } else {
+                    tap_code(KC_LEFT);
+            }
         }
     }
     return false;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case ENC_LEVEL:
+      if (record->event.pressed) {
+        enc_level = !enc_level;
+      }
+      return false; // Skip all further processing of this key
+
+    default:
+      return true; // Process all other keycodes normally
+  }
 }
