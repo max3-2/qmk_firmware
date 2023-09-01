@@ -30,21 +30,12 @@
 #define WS2812_DMA_STREAM STM32_DMA2_STREAM5
 #define WS2812_DMA_CHANNEL 6
 
-// Encoder better setup - resolution in info json and more debounce tolerance
-// #define ENCODER_RESOLUTION 1
-// #define TAP_CODE_DELAY 5
-// #define ENCODER_DEFAULT_POS 0x03
+// Encoder better setup - resolution
+// Res. of 2 working for alpine
+// #define ENCODER_RESOLUTION 2
+// Res. of 4 working for Bourns 64
+#define ENCODER_RESOLUTION 4
 
 // RGB Backlight
 #define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_BREATHING
 #define RGBLIGHT_DEFAULT_HUE 195
-
-// RGB Matrix
-// #define RGB_MATRIX_LED_COUNT 6
-// #define RGB_MATRIX_DEFAULT_VAL 150
-
-// #define RGB_DISABLE_WHEN_USB_SUSPENDED  // turn off effects when suspended
-// #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_BREATHING
-
-// #define ENABLE_RGB_MATRIX_HUE_WAVE
-// #define ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN

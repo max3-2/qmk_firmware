@@ -32,7 +32,7 @@
     "encoder": {
         "enabled": true,
         "rotary": [
-            {"pin_a": "C0", "pin_b": "C1", "resolution": 2}
+            {"pin_a": "C0", "pin_b": "C1"}
         ]
     },
 

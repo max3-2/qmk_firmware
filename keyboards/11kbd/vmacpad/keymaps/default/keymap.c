@@ -21,7 +21,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_BASE] = LAYOUT(
         LGUI(KC_MINUS), KC_S, MO(_FN), LSFT(KC_Z), LGUI(KC_EQUAL),
-        KC_F, KC_G, KC_H, KC_I, KC_J,
+        KC_A, KC_P, KC_T, KC_R, KC_B,
                     ENC_LEVEL,
         KC_I, KC_J, KC_SPACE, KC_L, KC_O
     ),
@@ -74,3 +74,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return true; // Process all other keycodes normally
   }
 }
+
+// void keyboard_post_init_user(void) {
+//   // Customise these values to desired behaviour
+//   debug_enable=true;
+//   debug_matrix=true;
+//   debug_keyboard=true;
+//   //debug_mouse=true;
+// }

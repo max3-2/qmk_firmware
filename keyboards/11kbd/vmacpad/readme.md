@@ -2,7 +2,7 @@
 
 TODO ADD RENDER
 
-*A macro pad with a large and high quality encoder*
+*A macro pad with a large and high quality encoder wheel*
 
 * Keyboard Maintainer: [max3-2](https://github.com/max3-2/hedgehog-kb)
 * Hardware Supported: Custom PCB with QMK support build on STM32f4
