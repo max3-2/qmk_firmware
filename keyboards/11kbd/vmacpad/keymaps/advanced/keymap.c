@@ -6,12 +6,12 @@
 #define ____ KC_TRNS
 
 enum layers{
-  _FCP,
-  _FCPFN,
-  _LR,
-  _LRFN,
-  _CODE,
-  _CODEFN
+    _FCP,
+    _LR,
+    _CODE,
+    _FCPFN,
+    _LRFN,
+    _CODEFN
 };
 
 enum custom_keycodes {
@@ -33,10 +33,10 @@ const rgblight_segment_t PROGMEM layer3_light[] = RGBLIGHT_LAYER_SEGMENTS(
     {2, 1, HSV_CHARTREUSE}
 );
 const rgblight_segment_t PROGMEM layer_fn_light[] = RGBLIGHT_LAYER_SEGMENTS(
-    {5, 1, HSV_GREEN}
+    {5, 1, HSV_MAGENTA}
 );
 const rgblight_segment_t PROGMEM layer_enc_light[] = RGBLIGHT_LAYER_SEGMENTS(
-    {4, 1, HSV_RED}
+    {4, 1, HSV_ORANGE}
 );
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
@@ -51,33 +51,22 @@ void keyboard_post_init_user(void) {
     // Enable the LED layersi
     rgblight_layers = my_rgb_layers;
     rgblight_set_layer_state(3, enc_level);
-    uint8_t current_layer = get_highest_layer(layer_state);
+    uint8_t current_layer = get_highest_layer(default_layer_state);
     rgblight_set_layer_state(current_layer, true);
-
-    //   // Customise these values to desired behaviour
-      debug_enable=true;
-    //   debug_matrix=true;
-      debug_keyboard=true;
-    //   //debug_mouse=true;
-
 };
 
-// layer_state_t default_layer_state_set_user(layer_state_t state) {
-//     rgblight_set_layer_state(0, layer_state_cmp(state, _FCP));
-//     rgblight_set_layer_state(1, layer_state_cmp(state, _LR));
-//     rgblight_set_layer_state(2, layer_state_cmp(state, _CODE));
-//     return state;
-// };
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(0, layer_state_cmp(state, _FCP));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _LR));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _CODE));
+    return state;
+};
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     bool is_active_fn = layer_state_cmp(state, _FCPFN) |
                         layer_state_cmp(state, _LRFN) ||
                         layer_state_cmp(state, _CODEFN);
     rgblight_set_layer_state(4, is_active_fn);
-
-    rgblight_set_layer_state(0, layer_state_cmp(state, _FCP));
-    rgblight_set_layer_state(1, layer_state_cmp(state, _LR));
-    rgblight_set_layer_state(2, layer_state_cmp(state, _CODE));
 
     return state;
 };
@@ -90,7 +79,7 @@ combo_t key_combos[] = {
 
 // Layer cycles
 #define LAYER_CYCLE_START 0
-#define LAYER_CYCLE_END   5
+#define LAYER_CYCLE_END   2
 
 //////////////
 // Keymaps
@@ -143,8 +132,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // with fast encoders. This is debounced by two-step since the encoder works
 // best with its native resolution which then has too many pulses
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    uint8_t current_layer = get_highest_layer(layer_state);
-     switch(current_layer){
+    uint8_t current_layer = get_highest_layer(default_layer_state);
+    switch(current_layer){
         case 0:
             if (enc_level) {  // Fast
                 if (clockwise) {
@@ -166,7 +155,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             }
             return false;
 
-        case 2:
+        case 1:
             if (enc_level) {  // Fast
                     if (clockwise) {
                         tap_code(KC_EQUAL);
@@ -207,16 +196,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         if (!record->event.pressed) {
             return false;
         }
-        print("CHANGE layer");
-        uint8_t current_layer = get_highest_layer(layer_state);
-        uprintf("layer %u", current_layer);
+        uint8_t current_layer = get_highest_layer(default_layer_state);
         // Skip two so FN is always between
-        uint8_t next_layer = current_layer + 2;
-        uprintf("next layer %u", next_layer);
+        // Now single skip with reorder
+        uint8_t next_layer = current_layer + 1;
         if (next_layer > LAYER_CYCLE_END) {
             next_layer = LAYER_CYCLE_START;
         }
-        layer_move(next_layer);
+        set_single_persistent_default_layer(next_layer);
+        // layer_move(next_layer);
         return false;
 
     default:
