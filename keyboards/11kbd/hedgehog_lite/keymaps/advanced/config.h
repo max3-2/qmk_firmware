@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include "config_common.h"
+// #include "config_common.h"
 
 // Leader config
 #define LEADER_PER_KEY_TIMING
@@ -46,3 +46,4 @@
 
 #define MY_PURPLE   191, 255, 230
 #define MY_CYAN     128, 255, 230
+#define MY_GOLD     49, 255, 225

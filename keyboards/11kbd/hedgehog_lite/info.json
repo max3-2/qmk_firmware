@@ -25,6 +25,15 @@
         "pid": "0x00A1",
         "vid": "0xFFFF"
     },
+    "rgblight": {
+        "led_count": 15,
+        "max_brightness": 240,
+        "hue_steps": 12,
+        "brightness_steps": 16
+    },
+    "ws2812": {
+        "pin": "F0"
+    },
     "layouts": {
         "LAYOUT": {
             "layout": [

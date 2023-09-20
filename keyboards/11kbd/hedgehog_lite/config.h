@@ -16,15 +16,10 @@
 
 #pragma once
 
-#include "config_common.h"
+// #include "config_common.h"
 
 // RGB config
-#define RGB_DI_PIN F0
-#define RGBLED_NUM 15
-#define RGBLIGHT_LIMIT_VAL 250
-#define RGBLIGHT_HUE_STEP 10
 #define RGBLIGHT_SAT_STEP 10
-#define RGBLIGHT_VAL_STEP 16
 
 // lights off during pc sleep
 #define RGBLIGHT_SLEEP
