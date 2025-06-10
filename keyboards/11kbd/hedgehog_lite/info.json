@@ -2,7 +2,7 @@
     "manufacturer": "11kbd",
     "keyboard_name": "hedgehog_lite",
     "maintainer": "git:max3-2",
-    "url": "https://github.com/max3-2/hedgehog-kb"
+    "url": "https://github.com/max3-2/hedgehog-kb",
     "bootloader": "atmel-dfu",
     "diode_direction": "COL2ROW",
     "features": {
@@ -27,7 +27,7 @@
     },
     "rgblight": {
         "led_count": 15,
-        "max_brightness": 240,
+        "max_brightness": 230,
         "hue_steps": 12,
         "brightness_steps": 16
     },
