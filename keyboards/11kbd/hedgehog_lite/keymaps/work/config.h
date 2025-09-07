@@ -20,7 +20,7 @@
 
 // Leader config
 #define LEADER_PER_KEY_TIMING
-#define LEADER_TIMEOUT 300
+#define LEADER_TIMEOUT 350
 
 // undef fancy RGB modes
 // #undef RGBLIGHT_EFFECT_BREATHING
