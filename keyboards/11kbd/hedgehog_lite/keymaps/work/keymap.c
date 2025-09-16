@@ -30,7 +30,7 @@ const rgblight_segment_t PROGMEM my_win_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 15, MY_GOLD}
 );
 const rgblight_segment_t PROGMEM my_win_fn_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 15, MY_PURPLE}
+    {0, 15, MY_CHAT}
 );
 const rgblight_segment_t PROGMEM my_win_sfn_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 15, MY_GREEN}
@@ -80,8 +80,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         MAC_LOCK, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, ____, KC_DEL,
         UG_TOGG, ____, KC_UP, LR_AEDIT, ____, ____, ____, ____, ____, ____, ____, UG_PREV, UG_NEXT, KC_AUDIO_MUTE, ____,
         ____, KC_LEFT, KC_DOWN, KC_RIGHT, ____, ____, ____, ____, ____, PDF(_WIN), UG_VALD, UG_VALU, KC_MEDIA_PLAY_PAUSE,
-        ____, ____, ____, ____, ____, ____, ____, ____, ____, UG_HUED, UG_HUEU, MO(_WIN_SUPERFN),
-        ____, ____, ____, ____, ____, ____
+        ____, ____, ____, ____, ____, ____, ____, ____, ____, UG_HUED, UG_HUEU, ____,
+        ____, ____, ____, ____, MO(_WIN_SUPERFN), ____
     ),
     [_WIN] = LAYOUT(
         KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_BSPC, KC_GRV,
@@ -95,8 +95,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         WIN_LOCK, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, ____, KC_DEL,
         UG_TOGG, KC_HOME, KC_UP, KC_END, ____, ____, ____, ____, ____, ____, ____, UG_PREV, UG_NEXT, KC_AUDIO_MUTE, ____,
         ____, KC_LEFT, KC_DOWN, KC_RIGHT, ____, ____, ____, ____, ____, PDF(_MAC), UG_VALD, UG_VALU, KC_MEDIA_PLAY_PAUSE,
-        ____, ____, ____, ____, ____, ____, ____, ____, ____, UG_HUED, UG_HUEU, MO(_WIN_SUPERFN),
-        ____, ____, ____, ____, ____, ____
+        ____, ____, ____, ____, ____, ____, ____, ____, ____, UG_HUED, UG_HUEU, ____,
+        ____, ____, ____, ____, MO(_WIN_SUPERFN), ____
     ),
     [_WIN_SUPERFN] = LAYOUT(
         ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
